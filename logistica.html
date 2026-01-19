@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistica del Evento - XV Anos Ivonne Jocelyne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 100%);
+            color: #333;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #ec4899;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #ec4899;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #fce7f3 0%, #f3e8ff 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .info-card h3 {
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .info-card strong {
+            color: #ec4899;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: #f8f9fa;
+            border-left: 4px solid #ec4899;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist li:before {
+            content: "[ ]";
+            font-size: 1rem;
+            color: #ec4899;
+            font-weight: bold;
+        }
+
+        .checklist li.completed:before {
+            content: "[X]";
+            color: #10b981;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #ec4899 0%, #8b5cf6 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -2.6rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #ec4899;
+        }
+
+        .timeline-item.completed:before {
+            background: #10b981;
+            border-color: #10b981;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #ec4899;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-urgent {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-box a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .protocol-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .protocol-table th, .protocol-table td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .protocol-table th {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+            color: white;
+        }
+
+        .protocol-table tr:nth-child(even) {
+            background-color: #fce7f3;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .protocol-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Logistica del Evento</h1>
+            <p>XV Anos de Ivonne Jocelyne Andrade Acevedo</p>
+            <p>14 de Marzo, 2026</p>
+
+            <div class="nav-links">
+                <a href="contrato.html">Contrato</a>
+                <a href="logistica.html">Logistica</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Informacion General -->
+            <section class="section">
+                <h2 class="section-title">
+                    Informacion General del Evento
+                </h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Quinceanera</h3>
+                        <p><strong>Nombre:</strong> Ivonne Jocelyne Andrade Acevedo</p>
+                        <p><strong>Cumpleanos real:</strong> 3 de Febrero</p>
+                        <p><strong>Fecha de fiesta:</strong> Sabado 14 de Marzo, 2026</p>
+                        <p><strong>Domicilio:</strong> Federico Guillermo Raifeisen 419 A, Col. Manantiales</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Padres</h3>
+                        <p><strong>Papa:</strong> David Andrade Hernandez</p>
+                        <p><strong>Mama:</strong> Lorena Acevedo Luna</p>
+                        <p><strong>Contacto:</strong> 479 100 6893</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Padrinos</h3>
+                        <p><strong>Madrina:</strong> Alicia Andrade Hernandez</p>
+                        <p><strong>Padrino:</strong> Jose Horacio Gomez Paz</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lugares del Evento -->
+            <section class="section">
+                <h2 class="section-title">
+                    Lugares del Evento
+                </h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Ceremonia Religiosa (Misa)</h3>
+                        <p><strong>Hora:</strong> 4:00 PM - 5:00 PM</p>
+                        <p><strong>Templo:</strong> Calle J. Antonio Torres 346</p>
+                        <p><strong>Esquina:</strong> Jupiter</p>
+                        <p><strong>Colonia:</strong> Villa Insurgentes</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Recepcion (Fiesta)</h3>
+                        <p><strong>Salon:</strong> Quinta Noriega</p>
+                        <p><strong>Direccion:</strong> Blvd Ibarvilla #120</p>
+                        <p><strong>Colonia:</strong> Ibarria</p>
+                        <p><strong>Hora:</strong> 6:00 PM - 1:00 AM</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Sesion Fotografica</h3>
+                        <p><strong>Fecha:</strong> Por definir</p>
+                        <p><strong>Hora:</strong> Por definir</p>
+                        <p><strong>Lugar:</strong> Por definir</p>
+                        <p style="margin-top: 1rem; color: #ef4444;">Urgente: Coordinar cuando tenga vestido, ramo y accesorios</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Protocolo / Minuto a Minuto -->
+            <section class="section">
+                <h2 class="section-title">
+                    Protocolo del Evento (Minuto a Minuto)
+                </h2>
+                <table class="protocol-table">
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Actividad</th>
+                            <th>Lugar / Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>4:00 PM - 5:00 PM</td>
+                            <td>Misa</td>
+                            <td>Templo - Col. Villa Insurgentes</td>
+                        </tr>
+                        <tr>
+                            <td>6:00 PM</td>
+                            <td>Llegada a la Quinta</td>
+                            <td>Quinta Noriega</td>
+                        </tr>
+                        <tr>
+                            <td>6:00 PM - 8:00 PM</td>
+                            <td>Comida</td>
+                            <td>DJ activo de 6:00 PM a 9:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>8:00 PM - 9:00 PM</td>
+                            <td>Vals (30 min - 1 hr)</td>
+                            <td>Vals principal y sorpresas</td>
+                        </tr>
+                        <tr>
+                            <td>8:00 PM - 9:00 PM</td>
+                            <td>Bailes Sorpresa</td>
+                            <td>Despues del vals</td>
+                        </tr>
+                        <tr>
+                            <td>8:00 PM - 9:00 PM</td>
+                            <td>Brindis</td>
+                            <td>Momento especial con la familia</td>
+                        </tr>
+                        <tr>
+                            <td>8:00 PM - 9:00 PM</td>
+                            <td>Entrega de Rosas</td>
+                            <td>Ceremonia tradicional</td>
+                        </tr>
+                        <tr>
+                            <td>8:00 PM - 9:00 PM</td>
+                            <td>Pastel</td>
+                            <td>Partido de pastel</td>
+                        </tr>
+                        <tr>
+                            <td>9:00 PM - 1:00 AM</td>
+                            <td>Grupo Norteno</td>
+                            <td>Musica en vivo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Timeline -->
+            <section class="section">
+                <h2 class="section-title">
+                    Cronologia del Proyecto
+                </h2>
+                <div class="timeline">
+                    <div class="timeline-item completed">
+                        <p class="timeline-date">8-9 de Enero, 2026 <span class="status-badge status-completed">Completado</span></p>
+                        <p>Recepcion de apartado de $1,625 MXN (cuarta parte) via transferencia bancaria BBVA</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <p class="timeline-date">Por Definir <span class="status-badge status-urgent">Urgente</span></p>
+                        <p>Sesion fotografica previa al evento</p>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">Cuando tenga vestido, ramo y accesorios. Pueden ir los familiares que gusten.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <p class="timeline-date">6 de Marzo, 2026 <span class="status-badge status-urgent">Importante</span></p>
+                        <p>Fecha limite de pago del saldo restante: $4,875 MXN</p>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">8 dias antes del evento</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <p class="timeline-date">14 de Marzo, 2026 <span class="status-badge status-pending">Pendiente</span></p>
+                        <p><strong>DIA DEL EVENTO</strong></p>
+                        <p>4:00 PM - Misa en el templo</p>
+                        <p>6:00 PM - Llegada a Quinta Noriega</p>
+                        <p>6:00 PM - 8:00 PM - Comida (DJ)</p>
+                        <p>8:00 PM - 9:00 PM - Vals, bailes, brindis, rosas, pastel</p>
+                        <p>9:00 PM - 1:00 AM - Grupo Norteno</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <p class="timeline-date">Abril-Mayo, 2026 <span class="status-badge status-pending">Pendiente</span></p>
+                        <p>Entrega de material final (30-45 dias despues del evento)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Checklist Foro 7 -->
+            <section class="section">
+                <h2 class="section-title">
+                    Checklist Foro 7 - Antes del Evento
+                </h2>
+
+                <h3 style="color: #8b5cf6; margin: 1.5rem 0 1rem;">Sesion Previa</h3>
+                <ul class="checklist">
+                    <li>Coordinar fecha de sesion con la clienta</li>
+                    <li>Coordinar hora de sesion</li>
+                    <li>Definir locacion de la sesion</li>
+                    <li>Verificar que tenga vestido, ramo y accesorios</li>
+                    <li>Verificar equipo fotografico (camaras, lentes)</li>
+                    <li>Cargar todas las baterias</li>
+                    <li>Formatear tarjetas de memoria</li>
+                    <li>Llevar reflectores/iluminacion portatil</li>
+                </ul>
+
+                <h3 style="color: #8b5cf6; margin: 1.5rem 0 1rem;">Dia del Evento</h3>
+                <ul class="checklist">
+                    <li>Llegar al domicilio para grabar la salida</li>
+                    <li>Confirmar direccion exacta del templo (J. Antonio Torres 346)</li>
+                    <li>Confirmar direccion de Quinta Noriega (Blvd Ibarvilla #120)</li>
+                    <li>Verificar hora exacta de misa (4:00 PM)</li>
+                    <li>Verificar hora exacta de llegada al salon (6:00 PM)</li>
+                    <li>Verificar equipo completo (camaras, lentes, audio)</li>
+                    <li>Cargar todas las baterias (foto, video)</li>
+                    <li>Llevar baterias de repuesto</li>
+                    <li>Llevar tarjetas de memoria formateadas</li>
+                    <li>Verificar iluminacion (flashes foto, luces video)</li>
+                    <li>Confirmar recepcion del saldo pendiente ($4,875)</li>
+                    <li>Llegar 30 minutos antes a la misa</li>
+                </ul>
+
+                <h3 style="color: #8b5cf6; margin: 1.5rem 0 1rem;">Material Requerido del Cliente</h3>
+                <ul class="checklist">
+                    <li>Fotos de nina a grande (para videoclip)</li>
+                    <li>Fotos de madrinas y padrinos</li>
+                    <li>Protocolo/minuto a minuto confirmado</li>
+                </ul>
+
+                <h3 style="color: #8b5cf6; margin: 1.5rem 0 1rem;">Post-Evento</h3>
+                <ul class="checklist">
+                    <li>Respaldar todo el material (fotos, video)</li>
+                    <li>Editar fotografias</li>
+                    <li>Editar video (musicalizar y titular)</li>
+                    <li>Crear videoclip para proyeccion</li>
+                    <li>Cliente selecciona 100 fotos para impresion</li>
+                    <li>Imprimir fotografias 5x7"</li>
+                    <li>Imprimir ampliacion 50x60 cm con marco</li>
+                    <li>Preparar USB con cajas impresas</li>
+                    <li>Entregar material completo al cliente</li>
+                </ul>
+            </section>
+
+            <!-- Informacion Pendiente -->
+            <section class="section">
+                <h2 class="section-title">
+                    Informacion Pendiente
+                </h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Prioridad Alta</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">[X] Nombre de la quinceanera: Ivonne Jocelyne Andrade Acevedo</li>
+                            <li style="margin-bottom: 0.5rem;">[X] Apartado: $1,625 recibido (8-9/ene/2026)</li>
+                            <li style="margin-bottom: 0.5rem;">[X] Lugar misa: Templo Col. Villa Insurgentes</li>
+                            <li style="margin-bottom: 0.5rem;">[X] Lugar fiesta: Quinta Noriega</li>
+                            <li style="margin-bottom: 0.5rem;">[X] Fecha: 14 de marzo de 2026</li>
+                            <li style="margin-bottom: 0.5rem;">[X] Horario completo definido</li>
+                            <li style="margin-bottom: 0.5rem;">[ ] Fecha de sesion fotografica</li>
+                            <li style="margin-bottom: 0.5rem;">[ ] Hora de sesion fotografica</li>
+                            <li style="margin-bottom: 0.5rem;">[ ] Lugar de sesion fotografica</li>
+                            <li style="margin-bottom: 0.5rem;">[ ] Fotos de nina a grande</li>
+                            <li style="margin-bottom: 0.5rem;">[ ] Fotos de madrinas y padrinos</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Notas Importantes</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">La sesion se hace cuando tenga vestido, ramo y accesorios</li>
+                            <li style="margin-bottom: 0.5rem;">Pueden ir familiares a la sesion, si los papas quieren foto que vayan cambiados</li>
+                            <li style="margin-bottom: 0.5rem;">Entre mas tiempo de anticipacion para la sesion, mejor</li>
+                            <li style="margin-bottom: 0.5rem;">Llegar antes al domicilio para grabar la salida</li>
+                            <li style="margin-bottom: 0.5rem;">El vals dura aproximadamente de 30 min a 1 hora</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contacto -->
+            <section class="section">
+                <div class="contact-box">
+                    <h3>Informacion de Contacto</h3>
+                    <p style="margin-bottom: 1rem;">
+                        <strong>Contratante:</strong> Lorena Acevedo Luna (Mama)<br>
+                        <strong>Tel/WhatsApp:</strong> <a href="https://wa.me/5214791006893">479 100 6893</a>
+                    </p>
+                    <hr style="border: 1px solid rgba(255,255,255,0.3); margin: 1.5rem 0;">
+                    <p>
+                        <strong>Producciones Foro 7</strong><br>
+                        <strong>WhatsApp:</strong> <a href="https://wa.me/5214779203776">477-920-3776</a><br>
+                        <strong>Email:</strong> <a href="mailto:foro7producciones@gmail.com">foro7producciones@gmail.com</a><br>
+                        <strong>Ubicacion:</strong> Padilla 112, Cumbres de Arbide, Leon, Gto.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Entregables -->
+            <section class="section">
+                <h2 class="section-title">
+                    Productos a Entregar
+                </h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Productos Fisicos</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">100 fotografias impresas 5x7"</li>
+                            <li style="margin-bottom: 0.5rem;">1 USB con video editado en 4K</li>
+                            <li style="margin-bottom: 0.5rem;">1 caja impresa para USB</li>
+                            <li style="margin-bottom: 0.5rem;">1 foto ampliada 50x60 cm con marco</li>
+                            <li style="margin-bottom: 0.5rem;">1 caja impresa para fotografias</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Productos Digitales</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;">Videoclip para proyeccion</li>
+                            <li style="margin-bottom: 0.5rem;">Todas las fotos en alta resolucion</li>
+                            <li style="margin-bottom: 0.5rem;">Video completo editado y musicalizado</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resumen Financiero -->
+            <section class="section">
+                <h2 class="section-title">
+                    Resumen Financiero
+                </h2>
+                <div class="info-card">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td><strong>Paquete contratado:</strong></td>
+                            <td style="text-align: right;">$6,500.00 MXN</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Apartado recibido (8-9/ene/2026):</strong></td>
+                            <td style="text-align: right; color: #10b981;">- $1,625.00 MXN</td>
+                        </tr>
+                        <tr style="border-top: 2px solid #ec4899;">
+                            <td><strong>Saldo pendiente:</strong></td>
+                            <td style="text-align: right; font-weight: bold; color: #ec4899;">$4,875.00 MXN</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fecha limite de pago:</strong></td>
+                            <td style="text-align: right;">6 de Marzo, 2026</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
