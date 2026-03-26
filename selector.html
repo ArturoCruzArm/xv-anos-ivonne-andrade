@@ -224,9 +224,9 @@
             </div>
 
             <div class="action-buttons">
-                <button class="btn btn-filter active" data-filter="all"><i class="fas fa-images"></i> Todas las Fotos</button>
+                <button class="btn btn-filter" data-filter="all"><i class="fas fa-images"></i> Todas las Fotos</button>
                 <button class="btn btn-filter" data-filter="ampliacion"><i class="fas fa-expand"></i> Ampliación</button>
-                <button class="btn btn-filter" data-filter="impresion"><i class="fas fa-print"></i> Impresión</button>
+                <button class="btn btn-filter active" data-filter="impresion"><i class="fas fa-print"></i> Impresión</button>
                 <button class="btn btn-filter" data-filter="redes_sociales"><i class="fas fa-share-alt"></i> Redes Sociales</button>
                 <button class="btn btn-filter" data-filter="invitaciones_web"><i class="fas fa-envelope"></i> Inv. Web</button>
                 <button class="btn btn-filter" data-filter="descartada"><i class="fas fa-trash"></i> Descartadas</button>
@@ -283,7 +283,7 @@
 
         let currentPhotoIndex = 0;
         let selections = typeof defaultSelections !== 'undefined' ? {...defaultSelections} : {};
-        let activeFilter = 'all';
+        let activeFilter = 'impresion';
 
         function renderGallery() {
             const grid = document.getElementById('photosGrid');
